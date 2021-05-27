@@ -3,6 +3,7 @@ package com.example.notification23032021;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    NotificationChannel notificationChannel = new NotificationChannel(channelId, "channel",NotificationManager.IMPORTANCE_HIGH);
+                    notificationChannel.enableVibration(true);
+                    notificationChannel.enableLights(true);
+                    notificationManager.createNotificationChannel(notificationChannel);
+                }
                 notificationManager.notify(1,notificationBuilder.build());
             }
         });
